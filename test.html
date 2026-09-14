@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Post-Operative Knee Assistant Test</title>
+</head>
+<body>
+
+    <h1>Test Post-Operative Knee Assistant</h1>
+
+    <!-- Button -->
+    <button type="button" onclick="testAPI()">Test API</button>
+
+    <!-- Result Display -->
+    <div id="result" style="margin-top:20px; font-size:18px; white-space: pre-wrap;"></div>
+
+    <script>
+        function testAPI() {
+
+            // Clear previous result
+            document.getElementById("result").innerText = "Loading...";
+
+            fetch("http://127.0.0.1:5000/chat", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    message: "Hello, how should I do knee exercise?"
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Server not responding");
+                }
+                return response.json();
+            })
+            .then(data => {
+
+                console.log("Server response:", data);
+
+                // Show text
+                if (data.text) {
+                    document.getElementById("result").innerText = data.text;
+                } else {
+                    document.getElementById("result").innerText = "No text received from server.";
+                }
+
+                // Play audio
+                if (data.audio) {
+                    const audio = new Audio(data.audio);
+                    audio.play();
+                }
+
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                document.getElementById("result").innerText = "Error: " + error.message;
+            });
+        }
+    </script>
+
+</body>
+</html>

@@ -74,3 +74,8 @@ multimodal-ai-for-rehabilitation/
 ├── requirements.txt
 ├── package.json
 └── vite.config.js
+
+## 🎥 Demo
+
+- **Demo 1 – AI Rehabilitation Assistant:** https://youtu.be/lPcuvlcWAtA
+- **Demo 2 – AI Rehabilitation Assistant:** https://youtu.be/Lza8Zsr54AU
